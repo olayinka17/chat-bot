@@ -19,9 +19,7 @@ const messageForm = document.getElementById("message-form");
 const messageInput = document.getElementById("message-input");
 
 socket.on("server-welcome", (data) => {
-  // const msg = document.createElement("div");
-  // msg.className = "bot-msg";
-  // msg.innerHTML = data.payload;
+
   addMessageToUI(false, data.payload, data.ts);
 });
 socket.on("server-error", (data) => {
@@ -35,9 +33,7 @@ socket.on("error", (data) => {
   addMessageToUI(false, data.payload, data.ts);
 });
 
-// socket.on("orders", (data) => {
-//   addMessageToUI(false, data);
-// });
+
 socket.on("payment_successful", (data) => {
   addMessageToUI(false, data.payload, data.ts);
 });
@@ -50,15 +46,13 @@ socket.on("created-order", (data) => {
   localStorage.setItem("lastOrderId", data.order._id);
 });
 
-// socket.on("current-order", (data) => {
-//   addMessageToUI(false, data);
-// });
+
 socket.on("cancelled", (data) => {
   addMessageToUI(false, data.payload, data.ts);
 });
 
 socket.on("menus", (data) => {
-  //menuList(data);
+ 
   addMessageToUI(false, menuList(data.payload), data.ts);
 });
 
@@ -163,7 +157,7 @@ const orderHistory = (data) => {
   `;
 
   data.forEach((order) => {
-    // compute total from items
+
     let total = order.items.reduce(
       (sum, item) => sum + item.price * item.quantity,
       0
@@ -234,14 +228,13 @@ const addMessageToUI = (isOwnedMessage, data, ts = Date.now()) => {
   menuItem.forEach((item) => {
     let qty = 0;
 
-    // const qtyEl = item.querySelector(".qty");
+
     const incBtn = item.querySelector(".increase");
     const decBtn = item.querySelector(".decrease");
 
     incBtn.addEventListener("click", () => {
       qty++;
-      //  qtyEl.textContent = qty;
-      //   socket.emit('add-to-cart', ())
+
       manageCart(
         {
           id: item.dataset.id,
@@ -254,7 +247,7 @@ const addMessageToUI = (isOwnedMessage, data, ts = Date.now()) => {
     decBtn.addEventListener("click", () => {
       if (qty > 0) {
         qty--;
-        // qtyEl.textContent = qty;
+
 
         manageCart(
           {

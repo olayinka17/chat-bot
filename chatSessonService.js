@@ -6,15 +6,10 @@ const axios = require("axios");
 require("dotenv").config();
 
 class Chats {
-  // constructor() {
 
-  // }
-  // async createMenu() {
-
-  // }
   async getAllMenu() {
     const menu = await Item.find();
-    // console.log(menu)
+
     return {
       status: "success",
       data: menu,
@@ -54,11 +49,10 @@ class Chats {
 
   async createOrder(deviceId) {
     const cart = await Cart.findOne({ device_id: deviceId });
-    //console.log(cart);
+
     if (cart) {
       let total_price = 0;
       let cartItems = cart.items;
-      //console.log(cartItems);
       if (cartItems.length > 0) {
         total_price = cartItems.reduce((prev, curr) => {
           const qty = curr.quantity ?? 1;
@@ -106,7 +100,6 @@ class Chats {
       }
     }
 
-    // console.log(total_price);
 
     return {
       status: "fail",
@@ -116,13 +109,7 @@ class Chats {
 
   async getAllOrders(deviceId) {
     const orders = await Order.find({ device_id: deviceId });
-    console.log(orders);
-    // if (!orders) {
-    //   return {
-    //     status: "fail",
-    //     message: "No past orders found",
-    //   };
-    // }
+
     return {
       status: "success",
       data: {
@@ -136,7 +123,7 @@ class Chats {
       path: "items.menu_item",
       select: "name",
     });
-    //console.log(order)
+
     if (!order) {
       return {
         status: "fail",

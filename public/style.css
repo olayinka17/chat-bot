@@ -300,15 +300,3 @@ body {
 .history-status.delivered { color: darkgreen; }
 .history-status.cancelled { color: red; }
 
-.bot-msg {
-  background: #f0f8ff;
-  color: #333;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin: 8px 0;
-  font-family: Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  max-width: 80%;
-  white-space: pre-wrap;
-}

@@ -9,8 +9,7 @@ class ChatSession {
 
   async getallMenu(deviceId) {
     const response = await Service.getAllMenu();
-    //console.log(menus)
-    //console.log(menus.data)
+
     await persistEvent(deviceId, "server", "menus", response.data);
 
     this.io.emit("menus", { payload: response.data, ts: Date.now() });
@@ -31,18 +30,16 @@ class ChatSession {
         payload: response.data.cart,
         ts: Date.now(),
       });
-      // console.log(response.data.cart);
     }
   }
   async addToCart(deviceId, menu, qty) {
     const response = await Service.manageCart(deviceId, menu, qty);
-    // await persistEvent(deviceId, "server", "cart", response);
     this.io.emit("cart", response);
   }
 
   async removeFromCart(deviceId, menu) {
     const response = await Service.manageCart(deviceId, menu, 0, true);
-    // await persistEvent(deviceId, "server", "cart", response);
+
     this.io.emit("cart", response);
   }
 
@@ -54,7 +51,7 @@ class ChatSession {
       await persistEvent(deviceId, "server", "error", message);
       this.io.emit("error", { payload: message, ts: Date.now() });
     } else {
-      // await persistEvent(deviceId, "server", "created-order", response.data);
+
       this.io.emit("created-order", response.data);
     }
   }

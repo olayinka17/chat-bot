@@ -34,7 +34,7 @@ const History = async (socket, deviceId) => {
 
     if (type === "server") {
       socket.emit(event, { payload, ts });
-      // console.log(event, payload);
+
     } else if (type === "client") {
       socket.emit("client-history-chats", { event, payload, ts });
     }
@@ -60,7 +60,6 @@ io.on("connection", async (socket) => {
   socket.on("session", async (data) => {
     await persistEvent(socket.deviceId, "client", "session", data);
 
-    //console.log(data)
     switch (data) {
       case "1":
         chatSession.getallMenu(socket.deviceId);
@@ -92,7 +91,6 @@ io.on("connection", async (socket) => {
           "server-error",
           errorMessage
         );
-      //socket.emit("error", `Invalid input`);
     }
   });
 
