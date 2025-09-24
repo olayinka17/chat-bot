@@ -52,7 +52,7 @@ io.on("connection", async (socket) => {
   const chatSession = new ChatSession({ io });
   socket.deviceId = socket.handshake.auth.deviceId;
   socket.orderId = socket.handshake.auth.orderId;
-  await client.del(`chat:${socket.deviceId}`);
+ 
 
 
   await History(socket, socket.deviceId);
